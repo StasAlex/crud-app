@@ -1,0 +1,30 @@
+<div class="container">
+  <!-- {{user$ | async | json}} -->
+  <div class="user-content">
+    <mat-card class="user-card">
+      <mat-card-header>
+        <div mat-card-avatar class="user-header-image"></div>
+        <mat-card-title>{{(user$ | async)?.email}}</mat-card-title>
+        <mat-card-subtitle>Angular Developer</mat-card-subtitle>
+        <mat-card-subtitle>{{(user$ | async)?.email}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image
+        src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+        alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Mollitia inventore delectus veniam, provident facilis consectetur
+          ex repudiandae ut rem ab, voluptatum obcaecati totam ipsum vel voluptatem
+          corporis, magni quod soluta.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button color="primary" mat-raised-button type="submit" routerLink="/home" (click)="logout()">LogOut
+        </button>
+
+      </mat-card-actions>
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+.form {
+  margin: 50px auto;
+  width: 500px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.justify-content-between {
+  display: flex;
+  justify-content: space-between;
+}
+
