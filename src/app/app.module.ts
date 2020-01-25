@@ -22,11 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, UserComponent, AdminComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, UserComponent, AdminComponent, EditUserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
