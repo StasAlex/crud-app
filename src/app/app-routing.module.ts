@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AuthOutService, AuthInService } from './services/guard.service';
 
 
 const routes: Routes = [
@@ -13,22 +14,22 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    // canActivate: [AuthOutService]
+    canActivate: [AuthOutService]
   },
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [AuthOutService]
+    canActivate: [AuthOutService]
   },
   {
     path: 'user',
     component: UserComponent,
-    // canActivate: [AuthInService]
+    canActivate: [AuthInService]
   },
   {
     path: 'admin',
     component: AdminComponent,
-    // canActivate: [AuthOutService]
+    canActivate: [AuthInService]
   },
   {
     path: 'editUser',

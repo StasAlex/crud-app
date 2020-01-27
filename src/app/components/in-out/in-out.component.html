@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-button *ngIf="isLogin$ | async; else login" (click)="signOut()">
+      Sign Out
+    </button>
+    <ng-template #login>
+      <button mat-button routerLink="/login">
+        Sign In
+      </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
+

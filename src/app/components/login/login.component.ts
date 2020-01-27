@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormControl,
   Validators,
   FormGroup,
   FormBuilder
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -18,13 +18,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hide = true;
 
+
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) {}
-
   ngOnInit() {
+    this.userService.getUsers();
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [
@@ -32,7 +35,6 @@ export class LoginComponent implements OnInit {
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ]
     });
-    // tslint:disable-next-line: deprecation
     this.clearFormFields();
   }
 
@@ -55,9 +57,9 @@ export class LoginComponent implements OnInit {
           if (this.loginForm.value.email === 'admin@admin.com') {
             this.router.navigateByUrl('/admin');
           }
-          // console.log(this.loginForm.value);
+          // this.loginService.addLoginData(this.loginForm.value);
         },
-        ({ message }) => {
+       ({ message }) => {
           alert(message);
         }
       );

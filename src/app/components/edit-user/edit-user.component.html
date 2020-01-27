@@ -1,1 +1,18 @@
-<p>edit-user works!</p>
+<div class="form-container">
+  <form [formGroup]="this.userService.userForm" class="userForm" (ngSubmit)="editUser()">
+    <mat-form-field>
+      <input matInput placeholder="Enter your name" formControlName="fullName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your position" formControlName="position">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your mobile number" formControlName="mobile">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your location" formControlName="location">
+    </mat-form-field>
+    <button mat-raised-button color="primary">Save</button>
+  </form>
+
+</div>

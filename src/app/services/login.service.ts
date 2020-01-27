@@ -3,12 +3,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { User} from 'firebase';
 import { pluck, tap } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private afAuth: AngularFireAuth) {}
+  
+  constructor(private afAuth: AngularFireAuth,
+              private userService: UserService) {}
+
+  userList = this.userService.userList;
 
   getUser(): Observable<User> {
     const user = this.afAuth.user;
@@ -23,6 +28,12 @@ export class LoginService {
       pluck('user')
     );
     return user;
+  }
+
+  addLoginData(user: any) {
+    this.userList.push({
+      email: user.email
+    });
   }
 
   logOut(): Observable<void> {
