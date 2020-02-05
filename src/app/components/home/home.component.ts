@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,10 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+
+// tslint:disable-next-line: member-ordering
+
+
   ngOnInit() {
   }
-
 }

@@ -1,34 +1,68 @@
-import { Injectable } from '@angular/core';
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  Injectable
+} from '@angular/core';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
+import {
+  AngularFireList
+} from 'angularfire2/database';
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+import {
+  map, tap
+} from 'rxjs/operators';
+import { UserData } from '../models/user-data.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  userList: AngularFireList<any>;
-  userForm = new FormGroup({
-    fullName: new FormControl(''),
-    position: new FormControl(''),
-    mobile: new FormControl(''),
-    location: new FormControl('')
-  });
 
-  constructor(
-    private firebase: AngularFireDatabase
-  ) {}
+  constructor(private firebase: AngularFireDatabase) {}
 
-  getUsers() {
-    this.userList = this.firebase.list('users');
-    return this.userList.snapshotChanges();
+  private convertUsers(userList: SnapshotAction<UserData>[] ): UserData[] {
+    return userList.map(
+      item => ({
+        key: item.key,
+        ...item.payload.val()
+      })
+    );
   }
 
-  addUserData(user: any) {
-    this.userList.push({
-      fullName: user.fullName,
-      position: user.position,
-      mobile: user.mobile,
-      location: user.location
-    });
+  getUsers(): Observable<UserData[]> {
+    return this.firebase.list('users')
+      .snapshotChanges()
+      .pipe(
+        map((userList: SnapshotAction<UserData>[]) => this.convertUsers(userList))
+      );
+  }
+
+  getUserByEmail(email: string): Observable<UserData> {
+    return this.firebase.list('users', ref => ref.orderByChild('email').equalTo(email).limitToFirst(1))
+      .snapshotChanges()
+      .pipe(
+        map((userList: SnapshotAction<UserData>[]) => this.convertUsers(userList)[0])
+      );
+  }
+
+  getUserByKey(key: string): Observable<UserData> {
+    return this.firebase.list('users', ref => ref.orderByKey().equalTo(key).limitToFirst(1))
+      .snapshotChanges()
+      .pipe(
+        map((userList: SnapshotAction<UserData>[]) => this.convertUsers(userList)[0])
+      );
+  }
+
+
+  addUserData({ key, ...userData }: UserData) {
+    const userList = this.firebase.list('users');
+    if (key) {
+      userList.update(key, userData);
+    } else {
+      userList.push(userData);
+    }
   }
 }

@@ -1,6 +1,18 @@
 table {
-  width: 100%;
+  margin: 10px auto;
+  width: 99%;
 }
 .admin-button{
   margin: 10px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.hide{
+  display: none;
+}
+mat-footer-row mat-footer-cell{
+  align-items: center;
+ justify-content: center;
+ font-style: italic;
 }

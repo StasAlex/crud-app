@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'editUser',
     component: EditUserComponent,
+  },
+  {
+    path: 'editUser/:key',
+    component: EditUserComponent,
   }
 ];
 

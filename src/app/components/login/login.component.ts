@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import {
   Validators,
   FormGroup,
   FormBuilder
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
-import { UserService } from 'src/app/services/user.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  LoginService
+} from 'src/app/services/login.service';
+import {
+  UserService
+} from 'src/app/services/user.service';
 
 
 @Component({
@@ -39,11 +48,11 @@ export class LoginComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.loginForm.get('email').hasError('required')
-      ? 'You must enter a value'
-      : this.loginForm.get('email').hasError('email')
-      ? 'Not a valid email'
-      : '';
+    return this.loginForm.get('email').hasError('required') ?
+      'You must enter a value' :
+      this.loginForm.get('email').hasError('email') ?
+      'Not a valid email' :
+      '';
   }
 
   onEmailLogin() {
@@ -51,15 +60,15 @@ export class LoginComponent implements OnInit {
       .loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         () => {
-          if (this.loginForm.value.email === 'stas.alex28@gmail.com') {
-            this.router.navigateByUrl('/user');
-          }
           if (this.loginForm.value.email === 'admin@admin.com') {
             this.router.navigateByUrl('/admin');
+          } else {
+            this.router.navigateByUrl('/user');
           }
-          // this.loginService.addLoginData(this.loginForm.value);
         },
-       ({ message }) => {
+        ({
+          message
+        }) => {
           alert(message);
         }
       );
