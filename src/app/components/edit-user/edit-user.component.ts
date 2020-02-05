@@ -1,12 +1,10 @@
 import { UserData } from './../../models/user-data.model';
 import { LoginService } from 'src/app/services/login.service';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { tap, pluck, map, switchMap, filter } from 'rxjs/operators';
+import { tap, switchMap, filter } from 'rxjs/operators';
 import { User } from 'firebase';
 import { combineLatest, BehaviorSubject } from 'rxjs';
 
