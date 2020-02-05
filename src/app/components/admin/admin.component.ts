@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   viewTable = true;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  searchKey: string;
+  key: string;
 
   constructor(private userService: UserService,
               private loginService: LoginService,
@@ -35,6 +35,10 @@ export class AdminComponent implements OnInit {
     this.loginService.logOut().subscribe(() => {
       this.router.navigate(['/home']);
     });
+  }
+
+  deleteUser(key: string) {
+   this.userService.removeUser(key);
   }
 
 }

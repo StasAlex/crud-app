@@ -51,7 +51,9 @@
       <button mat-icon-button routerLink="/editUser/{{row.key}}">
         <mat-icon>launch</mat-icon>
       </button>
-      <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      <button mat-icon-button color="warn" (click)="deleteUser(row.key)">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
     </td>
   </ng-container>
 
@@ -74,4 +76,4 @@
   <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData!=null}"></mat-footer-row>
   <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide': !(listData!=null && listData.data.length==0)}"></mat-footer-row>
 </table>
-<mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<mat-paginator [length]="100" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>

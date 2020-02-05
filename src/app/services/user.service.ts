@@ -1,18 +1,6 @@
-import {
-  Injectable
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
-import {
-  AngularFireList
-} from 'angularfire2/database';
-import {
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
-import {
-  map, tap
-} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserData } from '../models/user-data.model';
 import { Observable } from 'rxjs';
 
@@ -22,6 +10,8 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   constructor(private firebase: AngularFireDatabase) {}
+
+
 
   private convertUsers(userList: SnapshotAction<UserData>[] ): UserData[] {
     return userList.map(
@@ -65,4 +55,20 @@ export class UserService {
       userList.push(userData);
     }
   }
+
+  removeUser(key: string) {
+    console.log('remove');
+    const userList = this.firebase.list('users');
+    userList.remove(key);
+  }
+
+  // deleteUser(userKey) {
+  //   return this.db.collection('users').doc(userKey).delete();
+  // }
+
+  // DeleteStudent(id: string) {
+  //   this.studentRef = this.db.object('students-list/' + id);
+  //   this.studentRef.remove();
+  // }
+
 }
