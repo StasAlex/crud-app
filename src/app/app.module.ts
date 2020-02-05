@@ -30,6 +30,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 
 
@@ -42,7 +43,8 @@ import { MatSortModule } from '@angular/material/sort';
     UserComponent,
     AdminComponent,
     EditUserComponent,
-    InOutComponent
+    InOutComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,

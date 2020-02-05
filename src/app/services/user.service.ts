@@ -3,6 +3,7 @@ import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { UserData } from '../models/user-data.model';
 import { Observable } from 'rxjs';
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -56,19 +57,14 @@ export class UserService {
     }
   }
 
+  createUser(user: User) {
+    const userList = this.firebase.list('users');
+    userList.push(user);
+  }
+
   removeUser(key: string) {
-    console.log('remove');
     const userList = this.firebase.list('users');
     userList.remove(key);
   }
-
-  // deleteUser(userKey) {
-  //   return this.db.collection('users').doc(userKey).delete();
-  // }
-
-  // DeleteStudent(id: string) {
-  //   this.studentRef = this.db.object('students-list/' + id);
-  //   this.studentRef.remove();
-  // }
 
 }

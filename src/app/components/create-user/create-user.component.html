@@ -1,0 +1,29 @@
+<div class="form-container">
+  <form [formGroup]="createUserForm" class="userForm" (ngSubmit)="createUser()">
+    <input matInput hidden formControlName="key">
+    <mat-form-field>
+      <input matInput placeholder="Enter your name" formControlName="fullName">
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your position" formControlName="position">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your mobile number" formControlName="mobile">
+      <mat-error *ngIf="createUserForm.controls['mobile'].errors?.required">This field is required.</mat-error>
+      <mat-error *ngIf="createUserForm.controls['mobile'].errors?.minlength">Minimum 8 characters needed.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your location" formControlName="location">
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" [disabled]="createUserForm.invalid">Save</button>
+      <button class="clear-button" mat-raised-button color="accent" type="button"
+        (click)="clearFormFields()">Clear</button>
+    </div>
+  </form>
+
+</div>

@@ -1,3 +1,4 @@
+import { CreateUserComponent } from './components/create-user/create-user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'editUser/:key',
     component: EditUserComponent,
+  },
+  {
+    path: 'createUser',
+    component: CreateUserComponent,
   }
 ];
 

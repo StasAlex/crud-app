@@ -2,7 +2,8 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,13 @@ export class AdminComponent implements OnInit {
 
   constructor(private userService: UserService,
               private loginService: LoginService,
-              private router: Router) {}
+              private router: Router,
+              iconRegistry: MatIconRegistry,
+              sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+      'add',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/add-icon.svg'));
+              }
 
 
   ngOnInit() {
@@ -31,6 +38,7 @@ export class AdminComponent implements OnInit {
 
       });
     }
+
   adminLogout(): void {
     this.loginService.logOut().subscribe(() => {
       this.router.navigate(['/home']);

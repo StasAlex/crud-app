@@ -1,16 +1,18 @@
 <mat-progress-bar class="mt-10" mode="indeterminate" *ngIf="listData==null"></mat-progress-bar>
-<!-- <div class="search-div">
-  <button mat-raised-button>
+ <div class="search-div">
+  <button mat-raised-button color="primary" routerLink="/createUser" >
     Create
-    <mat-icon>Add</mat-icon>
+    <i class="material-icons">
+      add
+    </i>
   </button>
-  <mat-form-field class="search-form-field">
+  <!-- <mat-form-field class="search-form-field">
     <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off">
     <button mat-button matSuffix mat-icon-button aria-label="Clear">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-form-field>
-</div> -->
+  </mat-form-field> -->
+</div> 
 <table mat-table [dataSource]="listData" class="mat-elevation-z8 user-table" matSort matPaginator>
 
   <!-- Full Name Column -->
