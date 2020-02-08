@@ -6,13 +6,13 @@
       add
     </i>
   </button>
-  <!-- <mat-form-field class="search-form-field">
-    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off">
-    <button mat-button matSuffix mat-icon-button aria-label="Clear">
+  <mat-form-field class="search-form-field">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()"  >
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-form-field> -->
-</div> 
+  </mat-form-field>
+</div>
 <table mat-table [dataSource]="listData" class="mat-elevation-z8 user-table" matSort matPaginator>
 
   <!-- Full Name Column -->

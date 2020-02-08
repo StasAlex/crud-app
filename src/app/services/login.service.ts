@@ -24,7 +24,8 @@ export class LoginService {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
     ).pipe(
       tap(data => console.log(data)),
-      pluck('user')
+      pluck('user'),
+      tap(data => console.log(data))
     );
     return user;
   }

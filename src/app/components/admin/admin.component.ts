@@ -4,7 +4,6 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -12,32 +11,49 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AdminComponent implements OnInit {
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['fullName', 'email', 'mobile', 'position', 'location', 'actions'];
+  displayedColumns: string[] = [
+    'fullName',
+    'email',
+    'mobile',
+    'position',
+    'location',
+    'actions'
+  ];
   viewTable = true;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  key: string;
+  searchKey: string;
 
-  constructor(private userService: UserService,
-              private loginService: LoginService,
-              private router: Router,
-              iconRegistry: MatIconRegistry,
-              sanitizer: DomSanitizer) {
+  constructor(
+    private userService: UserService,
+    private loginService: LoginService,
+    private router: Router,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) {
     iconRegistry.addSvgIcon(
       'add',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/add-icon.svg'));
-              }
-
-
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/img/examples/add-icon.svg'
+      )
+    );
+  }
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      userArr => {
-        this.listData = new MatTableDataSource(userArr);
-        this.listData.sort = this.sort;
-        this.listData.paginator = this.paginator;
+    this.userService.getUsers().subscribe(userArr => {
+      this.listData = new MatTableDataSource(userArr);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+    });
+  }
 
-      });
-    }
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.listData.filter = this.searchKey.trim().toLocaleLowerCase();
+  }
 
   adminLogout(): void {
     this.loginService.logOut().subscribe(() => {
@@ -46,7 +62,6 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUser(key: string) {
-   this.userService.removeUser(key);
+    this.userService.removeUser(key);
   }
-
 }

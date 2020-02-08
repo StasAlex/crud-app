@@ -40,7 +40,8 @@ export class UserService {
   }
 
   getUserByKey(key: string): Observable<UserData> {
-    return this.firebase.list('users', ref => ref.orderByKey().equalTo(key).limitToFirst(1))
+    return this.firebase.list(
+      'users', ref => ref.orderByKey().equalTo(key).limitToFirst(1))
       .snapshotChanges()
       .pipe(
         map((userList: SnapshotAction<UserData>[]) => this.convertUsers(userList)[0])
